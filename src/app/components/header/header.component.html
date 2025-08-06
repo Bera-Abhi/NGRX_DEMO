@@ -1,0 +1,54 @@
+<header class="bg-white shadow-md border-b border-gray-200 sticky top-0 z-50">
+  <div class="container mx-auto px-4 py-3">
+    <div class="flex items-center justify-between">
+      <!-- Logo/Brand -->
+      <div class="flex items-center space-x-3">
+        <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+          <span class="text-white font-bold text-xl">🍎</span>
+        </div>
+        <div>
+          <h1 class="text-2xl font-bold text-gray-800">Fresh Farm</h1>
+          <p class="text-xs text-gray-500 -mt-1">Farm to Table</p>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex items-center space-x-1">
+        <a 
+          routerLink="/fruits" 
+          routerLinkActive="bg-orange-50 text-orange-600 border-orange-200"
+          class="px-4 py-2 rounded-lg text-gray-700 hover:text-orange-600 hover:bg-orange-50 transition-all duration-200 font-medium border border-transparent"
+        >
+          🍎 Fruits
+        </a>
+        <a 
+          routerLink="/vegetables" 
+          routerLinkActive="bg-green-50 text-green-600 border-green-200"
+          class="px-4 py-2 rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-200 font-medium border border-transparent"
+        >
+          🥬 Vegetables
+        </a>
+        <a 
+          routerLink="/cart" 
+          routerLinkActive="bg-blue-50 text-blue-600 border-blue-200"
+          class="px-4 py-2 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 font-medium border border-transparent relative"
+        >
+          🛒 Cart
+          <span 
+            *ngIf="cartItemCount > 0"
+            class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
+          >
+            {{ cartItemCount }}
+          </span>
+        </a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>

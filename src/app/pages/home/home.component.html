@@ -1,0 +1,224 @@
+<div
+  class="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50"
+>
+  <!-- Hero Section with Real Image Background -->
+  <div
+    class="relative bg-gradient-to-r from-green-600 to-emerald-700 text-white overflow-hidden"
+  >
+    <div class="absolute inset-0 bg-black opacity-20"></div>
+    <div class="relative container mx-auto px-4 py-16">
+      <div class="text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+          Fresh From
+          <span class="text-yellow-300">Farm</span>
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
+          Discover handpicked organic fruits and vegetables, delivered fresh to
+          your doorstep
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            routerLink="/fruits"
+            class="bg-yellow-400 text-gray-900 font-bold py-4 px-8 rounded-full hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105 shadow-lg"
+          >
+            🍎 Shop Fruits
+          </a>
+          <a
+            routerLink="/vegetables"
+            class="bg-white text-green-700 font-bold py-4 px-8 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
+          >
+            🥬 Shop Vegetables
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Categories -->
+  <div class="container mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">What We Offer</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Carefully selected produce from local farmers and trusted suppliers
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <!-- Fruits Section -->
+      <div
+        class="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500"
+      >
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-orange-400 to-red-500 opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+        ></div>
+        <div class="relative p-8 text-white">
+          <div class="text-6xl mb-4">🍊</div>
+          <h3 class="text-3xl font-bold mb-4">Fresh Fruits</h3>
+          <p class="text-lg mb-6 opacity-90">
+            From sweet mangoes to crisp apples, our fruits are picked at peak
+            ripeness for maximum flavor and nutrition.
+          </p>
+          <ul class="space-y-2 mb-6 text-sm">
+            <li>✓ Organic & Pesticide-free</li>
+            <li>✓ Handpicked by experts</li>
+            <li>✓ Same-day delivery</li>
+          </ul>
+          <a
+            routerLink="/fruits"
+            class="inline-block bg-white text-orange-600 font-bold py-3 px-6 rounded-full hover:bg-gray-100 transition-all duration-300"
+          >
+            Explore Fruits →
+          </a>
+        </div>
+      </div>
+
+      <!-- Vegetables Section -->
+      <div
+        class="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500"
+      >
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-green-500 to-emerald-600 opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+        ></div>
+        <div class="relative p-8 text-white">
+          <div class="text-6xl mb-4">🥬</div>
+          <h3 class="text-3xl font-bold mb-4">Fresh Vegetables</h3>
+          <p class="text-lg mb-6 opacity-90">
+            Farm-fresh vegetables that retain their natural taste and
+            nutritional value from field to table.
+          </p>
+          <ul class="space-y-2 mb-6 text-sm">
+            <li>✓ Farm-to-table freshness</li>
+            <li>✓ Seasonal selection</li>
+            <li>✓ Quality guaranteed</li>
+          </ul>
+          <a
+            routerLink="/vegetables"
+            class="inline-block bg-white text-green-600 font-bold py-3 px-6 rounded-full hover:bg-gray-100 transition-all duration-300"
+          >
+            Explore Vegetables →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why Choose Us -->
+  <div class="bg-gray-50 py-16">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 mb-4">
+          Why Choose Fresh Farm?
+        </h2>
+        <p class="text-lg text-gray-600">
+          We're committed to bringing you the best quality produce
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="text-center group">
+          <div
+            class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors duration-300"
+          >
+            <span class="text-3xl">🌱</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Organic Quality</h3>
+          <p class="text-gray-600">
+            All our products are certified organic and sourced from trusted
+            local farmers.
+          </p>
+        </div>
+
+        <div class="text-center group">
+          <div
+            class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition-colors duration-300"
+          >
+            <span class="text-3xl">🚚</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Fast Delivery</h3>
+          <p class="text-gray-600">
+            Same-day delivery to ensure maximum freshness and quality retention.
+          </p>
+        </div>
+
+        <div class="text-center group">
+          <div
+            class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-yellow-200 transition-colors duration-300"
+          >
+            <span class="text-3xl">💰</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Best Prices</h3>
+          <p class="text-gray-600">
+            Competitive prices without compromising on quality or freshness.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customer Testimonials -->
+  <div class="container mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">
+        What Our Customers Say
+      </h2>
+    </div>
+
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+    >
+      <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+        <div class="flex items-center mb-4">
+          <div
+            class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-3"
+          >
+            <span class="text-xl">👨‍👩‍👧‍👦</span>
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-800">Priya Sharma</h4>
+            <p class="text-sm text-gray-500">Mumbai</p>
+          </div>
+        </div>
+        <p class="text-gray-600">
+          "The fruits are incredibly fresh! My kids love the sweet mangoes. Best
+          quality I've found online."
+        </p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+        <div class="flex items-center mb-4">
+          <div
+            class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-3"
+          >
+            <span class="text-xl">👨‍💼</span>
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-800">Rajesh Kumar</h4>
+            <p class="text-sm text-gray-500">Delhi</p>
+          </div>
+        </div>
+        <p class="text-gray-600">
+          "Fast delivery and excellent quality vegetables. The tomatoes are
+          perfect for my restaurant."
+        </p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+        <div class="flex items-center mb-4">
+          <div
+            class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mr-3"
+          >
+            <span class="text-xl">👩‍⚕️</span>
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-800">Dr. Meera Patel</h4>
+            <p class="text-sm text-gray-500">Bangalore</p>
+          </div>
+        </div>
+        <p class="text-gray-600">
+          "As a nutritionist, I recommend Fresh Farm to all my clients. The
+          organic quality is outstanding."
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
