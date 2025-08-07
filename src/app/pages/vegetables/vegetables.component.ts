@@ -18,6 +18,7 @@ import {
   VegetablesService,
 } from '../../services/vegetables.service';
 import { AppState } from '../../store/app.state';
+import { selectIsItemInCart } from '../../store/cart.reducer';
 
 @Component({
   selector: 'app-vegetables',
@@ -45,8 +46,7 @@ export class VegetablesComponent implements OnInit {
     this.store.dispatch(addToCart({ product: vegetable }));
   }
 
-  isInCart(vegetableId: number): boolean {
-    // Static implementation - show some items as in cart
-    return vegetableId === 101 || vegetableId === 103; // Carrot and Tomato are in cart
+  isInCart(vegetableId: number): Observable<boolean> {
+    return this.store.select(selectIsItemInCart(vegetableId));
   }
 }

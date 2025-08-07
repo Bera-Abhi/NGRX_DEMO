@@ -85,7 +85,7 @@
               >
             </div>
             <span
-              *ngIf="isInCart(vegetable.id)"
+              *ngIf="isInCart(vegetable.id) | async"
               class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium"
             >
               ✓ In Cart
@@ -95,11 +95,13 @@
           <!-- Add to Cart Button -->
           <button
             (click)="addToCart(vegetable)"
-            [disabled]="isInCart(vegetable.id)"
+            [disabled]="isInCart(vegetable.id) | async"
             class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold py-3 px-4 rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
           >
-            <span *ngIf="!isInCart(vegetable.id)">🛒 Add to Cart</span>
-            <span *ngIf="isInCart(vegetable.id)">✓ Added to Cart</span>
+            <span *ngIf="!(isInCart(vegetable.id) | async)"
+              >🛒 Add to Cart</span
+            >
+            <span *ngIf="isInCart(vegetable.id) | async">✓ Added to Cart</span>
           </button>
         </div>
       </div>

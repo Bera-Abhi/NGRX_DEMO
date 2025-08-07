@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-
-interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  category: 'fruit' | 'vegetable';
-  image: string;
-  quantity: number;
-}
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import {
+  removeFromCart,
+  updateCartItemQuantity,
+  clearCart,
+} from '../../store/cart.action';
+import {
+  selectCartItems,
+  selectCartTotal,
+  CartItem,
+} from '../../store/cart.reducer';
+import { AppState } from '../../store/app.state';
 
 @Component({
   selector: 'app-cart',
@@ -19,69 +23,28 @@ interface CartItem {
   styleUrl: './cart.component.scss',
 })
 export class CartComponent implements OnInit {
-  cartItems: CartItem[] = [
-    {
-      id: 1,
-      name: 'Alphonso Mango',
-      price: 299,
-      category: 'fruit',
-      image:
-        'https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&h=300&fit=crop',
-      quantity: 2,
-    },
-    {
-      id: 101,
-      name: 'Carrot',
-      price: 79,
-      category: 'vegetable',
-      image:
-        'https://images.unsplash.com/photo-1447175008436-170170753d52?w=400&h=300&fit=crop',
-      quantity: 1,
-    },
-    {
-      id: 103,
-      name: 'Tomato',
-      price: 89,
-      category: 'vegetable',
-      image:
-        'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400&h=300&fit=crop',
-      quantity: 3,
-    },
-  ];
+  cartItems$: Observable<CartItem[]>;
+  cartTotal$: Observable<number>;
 
-  cartTotal = 0;
-
-  ngOnInit(): void {
-    this.calculateTotal();
+  constructor(private store: Store<AppState>) {
+    this.cartItems$ = this.store.select(selectCartItems);
+    this.cartTotal$ = this.store.select(selectCartTotal);
   }
 
-  calculateTotal(): void {
-    this.cartTotal = this.cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
+  ngOnInit(): void {}
+
+  updateQuantity(itemId: number, newQuantity: number): void {
+    this.store.dispatch(
+      updateCartItemQuantity({ productId: itemId, quantity: newQuantity })
     );
   }
 
-  updateQuantity(itemId: number, newQuantity: number): void {
-    if (newQuantity <= 0) {
-      this.removeFromCart(itemId);
-    } else {
-      const item = this.cartItems.find((item) => item.id === itemId);
-      if (item) {
-        item.quantity = newQuantity;
-        this.calculateTotal();
-      }
-    }
-  }
-
   removeFromCart(itemId: number): void {
-    this.cartItems = this.cartItems.filter((item) => item.id !== itemId);
-    this.calculateTotal();
+    this.store.dispatch(removeFromCart({ productId: itemId }));
   }
 
   clearCart(): void {
-    this.cartItems = [];
-    this.calculateTotal();
+    this.store.dispatch(clearCart());
   }
 
   getItemTotal(item: CartItem): number {

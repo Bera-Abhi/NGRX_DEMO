@@ -12,168 +12,174 @@
   <div class="container mx-auto px-4 py-12">
     <div class="max-w-5xl mx-auto">
       <!-- Cart Items -->
-      <div
-        *ngIf="cartItems.length > 0"
-        class="bg-white rounded-xl shadow-lg overflow-hidden mb-8 border border-gray-100"
-      >
-        <div class="p-6 border-b border-gray-200 bg-gray-50">
-          <h2 class="text-2xl font-bold text-gray-800">
-            Cart Items ({{ cartItems.length }})
-          </h2>
+      <ng-container *ngIf="cartItems$ | async as cartItems">
+        <div
+          *ngIf="cartItems.length > 0"
+          class="bg-white rounded-xl shadow-lg overflow-hidden mb-8 border border-gray-100"
+        >
+          <div class="p-6 border-b border-gray-200 bg-gray-50">
+            <h2 class="text-2xl font-bold text-gray-800">
+              Cart Items ({{ cartItems.length }})
+            </h2>
+          </div>
+
+          <div class="divide-y divide-gray-200">
+            <div
+              *ngFor="let item of cartItems"
+              class="p-6 flex items-center space-x-4 hover:bg-gray-50 transition-colors duration-200"
+            >
+              <!-- Item Image -->
+              <div class="flex-shrink-0">
+                <div
+                  class="w-20 h-20 rounded-lg overflow-hidden border border-gray-200"
+                >
+                  <img
+                    [src]="item.image"
+                    [alt]="item.name"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              <!-- Item Details -->
+              <div class="flex-1 min-w-0">
+                <h3 class="text-lg font-semibold text-gray-800">
+                  {{ item.name }}
+                </h3>
+                <p class="text-sm text-gray-500">
+                  {{ item.origin }}
+                </p>
+                <p class="text-lg font-bold text-green-600">
+                  ₹{{ item.price }}
+                </p>
+              </div>
+
+              <!-- Quantity Controls -->
+              <div class="flex items-center space-x-3">
+                <button
+                  (click)="updateQuantity(item.id, item.quantity - 1)"
+                  class="w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center transition-colors duration-200 font-bold text-gray-700"
+                >
+                  -
+                </button>
+                <span class="w-16 text-center font-semibold text-lg">{{
+                  item.quantity
+                }}</span>
+                <button
+                  (click)="updateQuantity(item.id, item.quantity + 1)"
+                  class="w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center transition-colors duration-200 font-bold text-gray-700"
+                >
+                  +
+                </button>
+              </div>
+
+              <!-- Item Total -->
+              <div class="text-right">
+                <p class="text-lg font-bold text-gray-800">
+                  ₹{{ getItemTotal(item) }}
+                </p>
+              </div>
+
+              <!-- Remove Button -->
+              <button
+                (click)="removeFromCart(item.id)"
+                class="text-red-500 hover:text-red-700 transition-colors duration-200 p-2"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div class="divide-y divide-gray-200">
-          <div
-            *ngFor="let item of cartItems"
-            class="p-6 flex items-center space-x-4 hover:bg-gray-50 transition-colors duration-200"
-          >
-            <!-- Item Image -->
-            <div class="flex-shrink-0">
-              <div
-                class="w-20 h-20 rounded-lg overflow-hidden border border-gray-200"
-              >
-                <img
-                  [src]="item.image"
-                  [alt]="item.name"
-                  class="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-
-            <!-- Item Details -->
-            <div class="flex-1 min-w-0">
-              <h3 class="text-lg font-semibold text-gray-800">
-                {{ item.name }}
-              </h3>
-              <p class="text-sm text-gray-500 capitalize">
-                {{ item.category }}
-              </p>
-              <p class="text-lg font-bold text-green-600">₹{{ item.price }}</p>
-            </div>
-
-            <!-- Quantity Controls -->
-            <div class="flex items-center space-x-3">
-              <button
-                (click)="updateQuantity(item.id, item.quantity - 1)"
-                class="w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center transition-colors duration-200 font-bold text-gray-700"
-              >
-                -
-              </button>
-              <span class="w-16 text-center font-semibold text-lg">{{
-                item.quantity
-              }}</span>
-              <button
-                (click)="updateQuantity(item.id, item.quantity + 1)"
-                class="w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center transition-colors duration-200 font-bold text-gray-700"
-              >
-                +
-              </button>
-            </div>
-
-            <!-- Item Total -->
-            <div class="text-right">
-              <p class="text-lg font-bold text-gray-800">
-                ₹{{ getItemTotal(item) }}
-              </p>
-            </div>
-
-            <!-- Remove Button -->
-            <button
-              (click)="removeFromCart(item.id)"
-              class="text-red-500 hover:text-red-700 transition-colors duration-200 p-2"
+        <!-- Empty Cart State -->
+        <div
+          *ngIf="cartItems.length === 0"
+          class="text-center py-16 bg-white rounded-xl shadow-lg border border-gray-100"
+        >
+          <div class="text-6xl mb-4">🛒</div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-2">
+            Your cart is empty
+          </h3>
+          <p class="text-gray-600 mb-6">
+            Add some fresh fruits and vegetables to get started!
+          </p>
+          <div class="space-x-4">
+            <a
+              routerLink="/fruits"
+              class="inline-block bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-3 px-6 rounded-lg hover:from-orange-600 hover:to-red-600 transition-all duration-200"
             >
-              <svg
-                class="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                ></path>
-              </svg>
+              🍎 Browse Fruits
+            </a>
+            <a
+              routerLink="/vegetables"
+              class="inline-block bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-200"
+            >
+              🥬 Browse Vegetables
+            </a>
+          </div>
+        </div>
+
+        <!-- Cart Summary -->
+        <div
+          *ngIf="cartItems.length > 0"
+          class="bg-white rounded-xl shadow-lg p-6 border border-gray-100"
+        >
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-bold text-gray-800">Cart Summary</h3>
+            <button
+              (click)="clearCart()"
+              class="text-red-500 hover:text-red-700 font-medium transition-colors duration-200"
+            >
+              Clear Cart
             </button>
           </div>
-        </div>
-      </div>
 
-      <!-- Empty Cart State -->
-      <div
-        *ngIf="cartItems.length === 0"
-        class="text-center py-16 bg-white rounded-xl shadow-lg border border-gray-100"
-      >
-        <div class="text-6xl mb-4">🛒</div>
-        <h3 class="text-2xl font-bold text-gray-800 mb-2">
-          Your cart is empty
-        </h3>
-        <p class="text-gray-600 mb-6">
-          Add some fresh fruits and vegetables to get started!
-        </p>
-        <div class="space-x-4">
-          <a
-            routerLink="/fruits"
-            class="inline-block bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-3 px-6 rounded-lg hover:from-orange-600 hover:to-red-600 transition-all duration-200"
-          >
-            🍎 Browse Fruits
-          </a>
-          <a
-            routerLink="/vegetables"
-            class="inline-block bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-200"
-          >
-            🥬 Browse Vegetables
-          </a>
-        </div>
-      </div>
+          <ng-container *ngIf="cartTotal$ | async as cartTotal">
+            <div class="space-y-4 mb-6">
+              <div class="flex justify-between">
+                <span class="text-gray-600">Subtotal:</span>
+                <span class="font-semibold">₹{{ cartTotal }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Tax (18% GST):</span>
+                <span class="font-semibold"
+                  >₹{{ (cartTotal * 0.18).toFixed(0) }}</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Delivery:</span>
+                <span class="font-semibold text-green-600">FREE</span>
+              </div>
+              <div class="border-t pt-4">
+                <div class="flex justify-between">
+                  <span class="text-xl font-bold text-gray-800">Total:</span>
+                  <span class="text-xl font-bold text-green-600"
+                    >₹{{ (cartTotal * 1.18).toFixed(0) }}</span
+                  >
+                </div>
+              </div>
+            </div>
+          </ng-container>
 
-      <!-- Cart Summary -->
-      <div
-        *ngIf="cartItems.length > 0"
-        class="bg-white rounded-xl shadow-lg p-6 border border-gray-100"
-      >
-        <div class="flex items-center justify-between mb-6">
-          <h3 class="text-xl font-bold text-gray-800">Cart Summary</h3>
           <button
-            (click)="clearCart()"
-            class="text-red-500 hover:text-red-700 font-medium transition-colors duration-200"
+            class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-4 px-6 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 text-lg"
           >
-            Clear Cart
+            🛒 Proceed to Checkout
           </button>
         </div>
-
-        <div class="space-y-4 mb-6">
-          <div class="flex justify-between">
-            <span class="text-gray-600">Subtotal:</span>
-            <span class="font-semibold">₹{{ cartTotal }}</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-gray-600">Tax (18% GST):</span>
-            <span class="font-semibold"
-              >₹{{ (cartTotal * 0.18).toFixed(0) }}</span
-            >
-          </div>
-          <div class="flex justify-between">
-            <span class="text-gray-600">Delivery:</span>
-            <span class="font-semibold text-green-600">FREE</span>
-          </div>
-          <div class="border-t pt-4">
-            <div class="flex justify-between">
-              <span class="text-xl font-bold text-gray-800">Total:</span>
-              <span class="text-xl font-bold text-green-600"
-                >₹{{ (cartTotal * 1.18).toFixed(0) }}</span
-              >
-            </div>
-          </div>
-        </div>
-
-        <button
-          class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-4 px-6 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 text-lg"
-        >
-          🛒 Proceed to Checkout
-        </button>
-      </div>
+      </ng-container>
     </div>
   </div>
 </div>
