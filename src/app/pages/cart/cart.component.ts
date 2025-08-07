@@ -51,8 +51,6 @@ export class CartComponent implements OnInit {
 
   cartTotal = 0;
 
-  constructor() {}
-
   ngOnInit(): void {
     this.calculateTotal();
   }
